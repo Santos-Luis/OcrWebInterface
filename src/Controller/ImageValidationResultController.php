@@ -29,7 +29,7 @@ class ImageValidationResultController extends AbstractController
             $message = 'No fraud detected';
         }
 
-        return new Response('<html><body>' . $message . '</body></html>');
+        return new Response('<html lang="en"><body>' . $message . '</body></html>');
     }
 
     /**
@@ -42,13 +42,16 @@ class ImageValidationResultController extends AbstractController
      */
     private function imageValidation(string $url): ?string
     {
-        // $response = $imageAnnotator->textDetection($url);
-        $path = '/home/luis/Documents/Symfony/Ocr/src/Controller/scam.jpg';
-
         $imageAnnotator = new ImageAnnotatorClient();
+        $temp = tmpfile();
+
+        file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'r'));
+        $path = stream_get_meta_data($temp)['uri'];
         $image = file_get_contents($path);
         $response = $imageAnnotator->textDetection($image);
+
         $imageAnnotator->close();
+        fclose($temp);
 
         $texts = $response->getTextAnnotations();
         foreach ($texts as $text) {
