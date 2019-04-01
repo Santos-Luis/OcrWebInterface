@@ -26,11 +26,13 @@ class InputPhotoUrlType extends AbstractType
                 TextType::class,
                 [
                     'attr' => [
-                        'placeholder' => 'Please provide the photo url'
-                    ]
+                        'placeholder' => 'Please provide the photo url',
+                        'style' => 'width: 200px; height: 20px; padding: 8px 16px; text-align: center; margin: 10px'
+                    ],
+                    'label' => false
                 ]
             )
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [ 'attr' => [ 'style' => 'width: 100px; height: 25px' ] ])
         ;
     }
 

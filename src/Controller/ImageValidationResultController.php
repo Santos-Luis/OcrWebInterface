@@ -29,7 +29,11 @@ class ImageValidationResultController extends AbstractController
             $message = 'No fraud detected';
         }
 
-        return new Response('<html lang="en"><body>' . $message . '</body></html>');
+        return $this->render(
+            'image_validation_result/index.html.twig',
+            [ 'message' => $message, 'path' => $url ]
+        );
+
     }
 
     /**

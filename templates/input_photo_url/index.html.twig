@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InputPhotoUrlController!{% endblock %}
+{% block title %}Verify your image here!{% endblock %}
 
 {% block body %}
-    {{ form(imageUrl) }}
+    <div style="text-align: center">
+        <h1>Please provide the image url</h1>
+
+        {{ form_start(imageUrl) }}
+            {{ form_widget(imageUrl) }}
+        {{ form_end(imageUrl) }}
+    </div>
 {% endblock %}
