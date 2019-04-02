@@ -49,22 +49,17 @@ class ImageValidationResultController extends AbstractController
      */
     private function imageValidation(string $url): ?string
     {
-        file_put_contents('php://stderr', 'hello, this is a test1!\n');
         $imageAnnotator = new ImageAnnotatorClient();
         $temp = tmpfile();
-        file_put_contents('php://stderr', 'hello, this is a test2!\n');
-        file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'r'));
+
         $path = stream_get_meta_data($temp)['uri'];
-        file_put_contents('php://stderr', 'hello, this is a test21!\n');
+
         $image = file_get_contents($path);
-        file_put_contents('php://stderr', 'hello, this is a test22!\n');
-        file_put_contents('php://stderr', $imageAnnotator->textDetection($image));
+
         $response = $imageAnnotator->textDetection($image);
-        file_put_contents('php://stderr', 'hello, this is a test3!\n');
 
         $imageAnnotator->close();
         fclose($temp);
-        file_put_contents('php://stderr', 'hello, this is a test4!\n');
 
         $texts = $response->getTextAnnotations();
         foreach ($texts as $text) {
