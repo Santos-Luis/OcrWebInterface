@@ -22,6 +22,7 @@ class ImageValidationResultController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        var_dump('here2');
         $url = $request->get('url');
 
         $message = $this->imageValidation($url);
