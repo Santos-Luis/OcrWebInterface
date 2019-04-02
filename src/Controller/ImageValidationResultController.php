@@ -55,7 +55,9 @@ class ImageValidationResultController extends AbstractController
         file_put_contents('php://stderr', 'hello, this is a test2!\n');
         file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'r'));
         $path = stream_get_meta_data($temp)['uri'];
+        file_put_contents('php://stderr', 'hello, this is a test21!\n');
         $image = file_get_contents($path);
+        file_put_contents('php://stderr', 'hello, this is a test22!\n');
         $response = $imageAnnotator->textDetection($image);
         file_put_contents('php://stderr', 'hello, this is a test3!\n');
 
