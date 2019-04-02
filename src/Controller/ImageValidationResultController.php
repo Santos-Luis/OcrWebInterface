@@ -22,15 +22,12 @@ class ImageValidationResultController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        file_put_contents('php://stderr', 'hello, this is a test!\n');
         $url = $request->get('url');
 
         $message = $this->imageValidation($url);
         if ($message === null) {
             $message = 'No fraud detected';
         }
-
-        file_put_contents('php://stderr', 'hello, this is a test5!\n');
 
         return $this->render(
             'image_validation_result/index.html.twig',
@@ -51,7 +48,8 @@ class ImageValidationResultController extends AbstractController
     {
         $imageAnnotator = new ImageAnnotatorClient();
         $temp = tmpfile();
-        file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'r'));
+
+        file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'rb'));
         $path = stream_get_meta_data($temp)['uri'];
 
         $image = file_get_contents($path);

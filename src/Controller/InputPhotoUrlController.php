@@ -7,6 +7,7 @@ use App\Form\InputPhotoUrlType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * InputPhotoUrlController
@@ -18,11 +19,10 @@ class InputPhotoUrlController extends AbstractController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
-        var_dump('here');
         $url = new PhotoUrl();
 
         $form = $this->createForm(
