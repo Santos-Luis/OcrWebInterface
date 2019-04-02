@@ -22,6 +22,7 @@ class InputPhotoUrlController extends AbstractController
      */
     public function index(Request $request)
     {
+        var_dump('here');
         $url = new PhotoUrl();
 
         $form = $this->createForm(
