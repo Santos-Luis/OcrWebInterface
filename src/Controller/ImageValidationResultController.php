@@ -56,7 +56,7 @@ class ImageValidationResultController extends AbstractController
 
         $image = file_get_contents($path);
         $response = $imageAnnotator->textDetection($image);
-        
+
         $imageAnnotator->close();
         fclose($temp);
         file_put_contents('php://stderr', 'hello, this is a test4!\n');
