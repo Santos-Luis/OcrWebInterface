@@ -51,15 +51,15 @@ class ImageValidationResultController extends AbstractController
     {
         $imageAnnotator = new ImageAnnotatorClient();
         $temp = tmpfile();
-
+        file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'r'));
         $path = stream_get_meta_data($temp)['uri'];
 
         $image = file_get_contents($path);
-
         $response = $imageAnnotator->textDetection($image);
-
+        
         $imageAnnotator->close();
         fclose($temp);
+        file_put_contents('php://stderr', 'hello, this is a test4!\n');
 
         $texts = $response->getTextAnnotations();
         foreach ($texts as $text) {
