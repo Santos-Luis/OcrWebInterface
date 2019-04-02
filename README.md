@@ -25,7 +25,7 @@ Then, to run the local server:
 composer php bin/console server:run
 ```
 
-This will host the website on your localhost. To see it, past in the 
+This will host the website on your localhost. To see it, past in the address given, in the output of the previous command, and add to it '/inputPhoto'
 
 ## Deployment
 
