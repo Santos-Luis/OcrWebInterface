@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Aws\Exception\AwsException;
+use Aws\Sqs\SqsClient;
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ImageValidationResultController extends AbstractController
 {
+    private const QUEUE_URL = 'https://sqs.eu-west-1.amazonaws.com/750336674511/dev_workshop';
+    private const DELAY_SECONDS = '10';
+
     /**
      * @Route("/result", name="image_validation_result")
      *
@@ -32,6 +37,7 @@ class ImageValidationResultController extends AbstractController
 
         if ($message !== null) {
             $this->writeToSheet(1, 'www', 'abc');
+            $this->sendMessageToQueue();
         }
 
         return $this->render(
@@ -100,5 +106,28 @@ class ImageValidationResultController extends AbstractController
         $conf = ['valueInputOption' => 'RAW'];
 
         $sheets->spreadsheets_values->append($spreadsheetId, $range, $valueRange, $conf);
+    }
+
+    private function sendMessageToQueue(): void
+    {
+        $client = new SqsClient([
+            'profile' => 'default',
+            'region' => 'eu-west-1',
+            'version' => '2012-11-05'
+        ]);
+
+        $message = ['property_id' => '123'];
+        $arguments = [
+            'QueueUrl'      => self::QUEUE_URL,
+            'MessageBody'   => json_encode($message),
+            'DelaySeconds'  => self::DELAY_SECONDS
+        ];
+
+        try {
+            $result = $client->sendMessage($arguments);
+            var_dump($result);
+        } catch (AwsException $e) {
+            error_log($e->getMessage());
+        }
     }
 }
