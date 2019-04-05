@@ -91,7 +91,6 @@ class ImageValidationResultController extends AbstractController
     function writeToSheet(int $propertyId, string $photoLink, string $textFounded): void
     {
         $client = new \Google_Client();
-        $client->setApplicationName('My PHP App');
         $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
         $client->setAccessType('offline');
         $client->setAuthConfig( __DIR__.'/../../keys/google-key.json');
@@ -125,7 +124,6 @@ class ImageValidationResultController extends AbstractController
 
         try {
             $result = $client->sendMessage($arguments);
-            var_dump($result);
         } catch (AwsException $e) {
             error_log($e->getMessage());
         }
