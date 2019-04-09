@@ -63,7 +63,7 @@ class ImageValidationResultController extends AbstractController
         file_put_contents(stream_get_meta_data($temp)['uri'], fopen($url, 'rb'));
         $path = stream_get_meta_data($temp)['uri'];
         $image = file_get_contents($path);
-        $response = $imageAnnotator->textDetection($image);
+        $response = $imageAnnotator->documentTextDetection($image);
 
         $imageAnnotator->close();
         fclose($temp);
