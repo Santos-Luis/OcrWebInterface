@@ -10,6 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * [PHP 7.x](https://tecadmin.net/install-php-macos/)
 * [Composer](https://getcomposer.org/)
+* Google cloud keys (to be placed in ``keys/`` directory) to a project with access to Cloud Vision API
 
 ### Installing
 
@@ -25,13 +26,12 @@ Then, to run the local server:
 composer php bin/console server:run
 ```
 
-This will host the website on your localhost. To see it, past in the address given, in the output of the previous command, and add to it '/inputPhoto'
+Enter in the address given and you can now past a url of an image.
 
 ## Deployment
 
-TODO
+TBD with [Heroku](https://www.heroku.com)
 
 ## Author
 
 * **Luís Henriques** - [Github](https://github.com/Santos-Luis)
-

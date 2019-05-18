@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class InputPhotoUrlController extends AbstractController
 {
     /**
-     * @Route("/inputPhoto", name="input_photo_url")
+     * @Route("/", name="input_photo_url")
      *
      * @param Request $request
      *
