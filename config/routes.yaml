@@ -1,5 +1,0 @@
-intro_page: ## not working yet ##
-    path: /
-    controller: App\Controller\InputPhotoUrlController
-    defaults:
-        template: 'input_photo_url/index.html.twig'
